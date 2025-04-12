@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\Egg;
-use App\Models\Gecko;
+use App\Models\Ippnu;
+use App\Models\Ipnu;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -14,7 +14,7 @@ class EggsExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return Egg::all();
+        return Ippnu::all();
     }
 
     /**
@@ -24,9 +24,12 @@ class EggsExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Tanggal Inkubasi',
-            'Keterangan',
-            'Perkawinan',
+            'Nama',
+            'Jabatan',
+            'Kelahiran',
+            'Alamat',
+            'Periode1',
+            'Periode2',
             'Deleted At',
             'Created At',
             'Updated At',

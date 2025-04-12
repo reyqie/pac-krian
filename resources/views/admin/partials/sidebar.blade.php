@@ -33,8 +33,9 @@
       <div class="collapse" id="forms">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('gecko.create') }}">Input Data Leopard Gecko</a>
-            <a class="nav-link" href="{{ route('egg.create') }}">Input Data Telur</a>
+            <a class="nav-link" href="{{ route('ipnu.create') }}">Input Data IPNU</a>
+            <a class="nav-link" href="{{ route('ippnu.create') }}">Input Data IPPNU</a>
+            <a class="nav-link" href="{{ route('news.create') }}">Input Data Berita</a>
           </li>
         </ul>
       </div>
@@ -49,8 +50,9 @@
       <div class="collapse" id="tables">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('gecko.index') }}">Data Leopard Gecko</a>
-            <a class="nav-link" href="{{ route('egg.index') }}">Data Telur</a>
+            <a class="nav-link" href="{{ route('ipnu.index') }}">Data IPNU</a>
+            <a class="nav-link" href="{{ route('ippnu.index') }}">Data IPPNU</a>
+            <a class="nav-link" href="{{ route('news.index') }}">Data Berita</a>
           </li>
         </ul>
       </div>

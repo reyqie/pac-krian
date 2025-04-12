@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Egg extends Model
+class News extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'news';
     protected $fillable = [
-        'tanggal_inkubasi',
-        'keterangan',
-        'perkawinan',
+        'title',
+        'content',
+        'date_event',
     ];
 
-    public function galleryEggs()
+    public function galleryNews()
     {
-        return $this->hasOne(GalleryEgg::class, 'egg_id');
+        return $this->hasMany(GalleryNews::class, 'news_id');
     }
 }

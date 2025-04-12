@@ -6,17 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GalleryGecko extends Model
+class GalleryNews extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'gallery_news';
     protected $fillable = [
-        'gecko_id',
+        'news_id',
         'url',
     ];
 
-    public function gecko()
+    public function news()
     {
-        $this->belongsTo(Gecko::class, 'gecko_id');
+        $this->belongsTo(News::class, 'news_id');
     }
 }

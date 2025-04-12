@@ -6,21 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Gecko extends Model
+class GalleryIppnu extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'gallery_ippnu';
     protected $fillable = [
-        'nama',
-        'line_albino',
-        'jenis_kelamin',
-        'kelahiran',
-        'deskripsi',
-        'perkawinan'
+        'ippnu_id',
+        'url',
     ];
 
-    public function galleryGeckos()
+    public function ippnu()
     {
-        return $this->hasMany(GalleryGecko::class, 'gecko_id');
+        $this->belongsTo(Ippnu::class, 'ippnu_id');
     }
 }

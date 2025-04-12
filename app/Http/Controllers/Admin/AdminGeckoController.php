@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\GeckosExport;
 use App\Http\Controllers\Controller;
-use App\Models\Gecko;
+use App\Models\Ipnu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,8 +13,8 @@ class AdminGeckoController extends Controller
 {
     public function index()
     {
-        $geckos = Gecko::with('galleryGeckos')->paginate(10);
-        return view('admin.pages.tables.data-gecko', compact('geckos'));
+        $ipnus = Ipnu::with('galleryIpnus')->paginate(10);
+        return view('admin.pages.tables.data-gecko', compact('ipnus'));
     }
 
     public function create()
@@ -25,119 +25,119 @@ class AdminGeckoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'line_albino' => 'required|string',
-            'jenis_kelamin' => 'required|string',
-            'kelahiran' => 'required|date',
-            'deskripsi' => 'required|string|max:255',
-            'perkawinan' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'position' => 'required|string',
+            'born' => 'required|date',
+            'address' => 'required|string',
+            'periode1' => 'required|string|max:255',
+            'periode2' => 'required|string|max:255',
             'url' => 'required|array',
             'url.*' => 'image|mimes:jpg,jpeg,png',
         ]);
 
-        $gecko = Gecko::create(
+        $ipnu = Ipnu::create(
             $request->only([
-                'nama',
-                'line_albino',
-                'jenis_kelamin',
-                'kelahiran',
-                'deskripsi',
-                'perkawinan',
+                'name',
+                'position',
+                'born',
+                'address',
+                'periode1',
+                'periode2',
             ])
         );
 
         if ($request->hasFile('url')) {
             foreach ($request->file('url') as $file) {
                 $filename = $file->hashName();
-                $file->storeAs('public/geckos', $filename);
+                $file->storeAs('public/ipnus', $filename);
 
-                $gecko->galleryGeckos()->create(['url' => $filename]);
+                $ipnu->galleryIpnus()->create(['url' => $filename]);
             }
         }
 
-        return redirect()->route('gecko.index')->with('status', 'Data Leopard Gecko berhasil ditambahkan!');
+        return redirect()->route('ipnu.index')->with('status', 'Data IPNU berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
-        $gecko = Gecko::findOrFail($id);
-        return view('admin.pages.edit.edit-gecko', compact('gecko'));
+        $ipnu = Ipnu::findOrFail($id);
+        return view('admin.pages.edit.edit-gecko', compact('ipnu'));
     }
 
-    public function update(Request $request, Gecko $gecko)
+    public function update(Request $request, Ipnu $ipnu)
     {
         $request->validate([
-            'nama' => 'nullable|string|max:255',
-            'line_albino' => 'nullable|string',
-            'jenis_kelamin' => 'nullable|string',
-            'kelahiran' => 'nullable|date',
-            'deskripsi' => 'nullable|string|max:255',
-            'perkawinan' => 'nullable|string|max:255',
+            'name' => 'nullable|string|max:255',
+            'position' => 'nullable|string',
+            'born' => 'nullable|date',
+            'address' => 'nullable|string',
+            'periode1' => 'nullable|string|max:255',
+            'periode2' => 'nullable|string|max:255',
             'url' => 'nullable|array',
             'url.*' => 'image|mimes:jpg,jpeg,png',
         ]);
 
         if ($request->hasFile('url')) {
 
-            foreach ($gecko->galleryGeckos as $galleryGecko) {
-                if ($galleryGecko->url) {
-                    Storage::delete('public/geckos/' . $galleryGecko->url);
+            foreach ($ipnu->galleryIpnus as $galleryIpnu) {
+                if ($galleryIpnu->url) {
+                    Storage::delete('public/ipnus/' . $galleryIpnu->url);
                 }
             }
 
-            $gecko->galleryGeckos()->forceDelete();
+            $ipnu->galleryIpnus()->forceDelete();
 
             foreach ($request->file('url') as $file) {
                 if ($file instanceof \Illuminate\Http\UploadedFile) {
                     $filename = $file->hashName();
-                    $file->storeAs('public/geckos', $filename);
+                    $file->storeAs('public/ipnus', $filename);
                 }
 
-                $gecko->galleryGeckos()->create([
+                $ipnu->galleryIpnus()->create([
                     'url' => $filename,
                 ]);
             }
 
-            $gecko->update([
-                'nama' => $request->nama,
-                'line_albino' => $request->line_albino,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'kelahiran' => $request->kelahiran,
-                'deskripsi' => $request->deskripsi,
-                'perkawinan' => $request->perkawinan,
+            $ipnu->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'born' => $request->born,
+                'address' => $request->address,
+                'periode1' => $request->periode1,
+                'periode2' => $request->periode2,
             ]);
         }
 
-        $gecko->update([
-            'nama' => $request->nama,
-            'line_albino' => $request->line_albino,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'kelahiran' => $request->kelahiran,
-            'deskripsi' => $request->deskripsi,
-            'perkawinan' => $request->perkawinan,
+        $ipnu->update([
+            'name' => $request->name,
+            'position' => $request->position,
+            'born' => $request->born,
+            'address' => $request->address,
+            'periode1' => $request->periode1,
+            'periode2' => $request->periode2,
         ]);
 
 
-        return redirect()->route('gecko.index')->with('status', 'Data Leopard Gecko berhasil diperbarui!');
+        return redirect()->route('ipnu.index')->with('status', 'Data IPNU berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
-        $gecko = Gecko::findOrFail($id);
+        $ipnu = Ipnu::findOrFail($id);
 
-        foreach ($gecko->galleryGeckos as $galleryGecko) {
-            if ($galleryGecko->url) {
-                Storage::delete('public/geckos/' . $galleryGecko->url);
+        foreach ($ipnu->galleryIpnus as $galleryIpnu) {
+            if ($galleryIpnu->url) {
+                Storage::delete('public/ipnus/' . $galleryIpnu->url);
             }
         }
 
-        $gecko->forceDelete();
+        $ipnu->forceDelete();
 
-        return redirect()->route('gecko.index');
+        return redirect()->route('ipnu.index');
     }
 
     public function export()
     {
-        return Excel::download(new GeckosExport, 'geckos.xlsx');
+        return Excel::download(new GeckosExport, 'ipnu.xlsx');
     }
 }

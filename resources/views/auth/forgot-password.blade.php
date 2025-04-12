@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Bgecko - Forgot Password')
+@section('title', 'Pelajar NU Krian - Forgot Password')
 
 @section('content')
 <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
@@ -13,7 +13,8 @@
         <div class="col-md-6">
           <div class="card-body">
             <div class="brand-wrapper">
-              <img src="{{ asset('auth/images/logo.png') }}" alt="logo" class="logo">
+              <img src="{{ asset('auth/images/logo-pac.jpg') }}" class="border rounded-circle d-inline-block" alt="logo" class="logo" width="50px">&nbsp;
+              <h4 class="fw-bold d-inline-block" style="color: #39db4a"><b>PELAJAR NU KRIAN</b></h4>
             </div>
             <p class="login-card-description">Change your password</p>
 

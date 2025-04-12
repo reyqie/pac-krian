@@ -22,9 +22,10 @@
 
     {{-- styling css --}}
     <link rel="stylesheet" href="{{ asset('web/css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/css/splash.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/gecko.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/egg.css') }}">
-    <link rel="stylesheet" href="{{ asset('web/css/animal-care.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/css/news.css') }}">
     <link rel="stylesheet" href="{{ asset('errors/css/empty-search.css') }}">
 
     {{-- favicon --}}
@@ -32,6 +33,17 @@
 
     {{-- title name --}}
     <title>@yield('title', config('app.name', 'Laravel'))</title>
+
+    {{-- BaguetteBox JS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            baguetteBox.run('.gallery');
+        });
+    </script>
+
 </head>
 
 <body>

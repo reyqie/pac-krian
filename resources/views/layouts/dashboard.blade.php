@@ -26,7 +26,7 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     {{-- title name --}}
-    <title>Dashboard Bgecko</title>
+    <title>Dashboard Pelajar NU Krian</title>
 </head>
 
 <body>

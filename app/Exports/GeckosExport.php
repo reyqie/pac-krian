@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Gecko;
+use App\Models\Ipnu;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -13,7 +13,7 @@ class GeckosExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return Gecko::all();
+        return Ipnu::all();
     }
 
     /**
@@ -24,11 +24,11 @@ class GeckosExport implements FromCollection, WithHeadings
         return [
             'ID',
             'Nama',
-            'Tipe',
-            'Jenis Kelamin',
+            'Jabatan',
             'Kelahiran',
-            'Deskripsi',
-            'Perkawinan',
+            'Alamat',
+            'Periode1',
+            'Periode2',
             'Deleted At',
             'Created At',
             'Updated At',

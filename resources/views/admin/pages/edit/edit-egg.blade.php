@@ -6,11 +6,11 @@
 <div class="main-panel">
     <div class="content-wrapper" style="background-color: #252635">
         <div class="page-header">
-            <h3 class="page-title text-white"> Edit Data Leopard Gecko </h3>
+            <h3 class="page-title text-white"> Edit Data IPPNU </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item text-secondary"></a>Edit Data</li>
-                    <li class="breadcrumb-item active text-white" aria-current="page">Leopard Gecko</li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">IPPNU</li>
                 </ol>
             </nav>
         </div>
@@ -18,31 +18,49 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card" style="background-color: #161B2F">
                     <div class="card-body text-white">
-                        <form class="forms-sample" method="POST" action="{{ route('egg.update', ['egg' => $egg->id]) }}"
+                        <form class="forms-sample" method="POST" action="{{ route('ippnu.update', ['ippnu' => $ippnu->id]) }}"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="exampleInputCity1">Tanggal Inkubasi</label>
-                                <input required type="text" name="tanggal_inkubasi" class="form-control text-white"
-                                    id="exampleInputCity1" value="{{ $egg->tanggal_inkubasi }}"
+                                <label for="exampleInputName1">Nama Lengkap</label>
+                                <input required type="text" name="name" class="form-control text-white"
+                                    id="exampleInputName1" placeholder="Masukkan nama lengkap" value="{{ $ippnu->name }}"
                                     style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea1">Keterangan</label>
-                                <textarea class="form-control text-white" name="keterangan" id="exampleTextarea1"
-                                    rows="4"
-                                    style="background-color: #0E111E; border: 3px solid #252635;">{{ $egg->keterangan }}</textarea>
+                                <label for="exampleInputEmail3">Jabatan</label>
+                                <input required type="text" name="position" class="form-control text-white"
+                                    id="exampleInputName1" placeholder="Jabatan" value="{{ $ippnu->position }}"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputCity1">Perkawinan</label>
-                                <input required type="text" name="perkawinan" class="form-control text-white"
-                                    id="exampleInputCity1" value="{{ $egg->perkawinan }}"
+                                <label for="exampleInputCity1">Kelahiran</label>
+                                <input required type="text" name="born" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Tanggal Kelahiran" value="{{ $ippnu->born }}"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Alamat</label>
+                                <textarea required class="form-control text-white" name="address" id="exampleTextarea1"
+                                    id="exampleTextarea1" rows="4"
+                                    style="background-color: #0E111E; border: 3px solid #252635;" placeholder="Masukkan Alamat">{{ $ippnu->address }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Masa Khidmat Tahun Awal</label>
+                                <input required type="text" name="periode1" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Masukkan tahun awal jabatan" value="{{ $ippnu->periode1 }}"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Masa Khidmat Tahun Akhir</label>
+                                <input required type="text" name="periode2" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Masukkan tahun akhir jabatan" value="{{ $ippnu->periode2 }}"
                                     style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
                                 <label>Upload Gambar</label>
-                                <input type="file" name="url" class="file-upload-default" id="profilePhotoInput"
+                                <input type="file" name="url[]" class="file-upload-default" id="profilePhotoInput"
                                     multiple>
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control text-white file-upload-info" disabled
@@ -55,7 +73,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-                            <a href="{{ route('egg.index') }}" class="btn btn-light">Cancel</a>
+                            <a href="{{ route('ippnu.index') }}" class="btn btn-light">Cancel</a>
                         </form>
                     </div>
                 </div>

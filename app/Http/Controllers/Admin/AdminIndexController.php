@@ -3,44 +3,47 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Egg;
-use App\Models\Gecko;
+use App\Models\Ippnu;
+use App\Models\Ipnu;
 use Illuminate\Http\Request;
 
 class AdminIndexController extends Controller
 {
     public function index()
     {
-        $geckos = Gecko::count();
-        $eggs = Egg::count();
+        $ipnus = Ipnu::count();
+        $ippnus = Ippnu::count();
 
-        $totalData = $geckos + $eggs;
+        $totalData = $ipnus + $ippnus;
 
-        $latestGeckos = Gecko::with('galleryGeckos')->latest()->take(5)->get();
-        $latestEggs = Egg::with('galleryEggs')->latest()->take(5)->get();
+        $latestIpnus = Ipnu::with('galleryIpnus')->latest()->take(5)->get();
+        $latestIppnus = Ippnu::with('galleryIppnus')->latest()->take(5)->get();
 
-        return view('admin.index', compact('geckos', 'eggs', 'totalData', 'latestGeckos', 'latestEggs'));
+        return view('admin.index', compact('ipnus', 'ippnus', 'totalData', 'latestIpnus', 'latestIppnus'));
     }
 
     public function search(Request $request)
     {
         $query = $request->input('query');
 
-        $geckos = Gecko::where('id', 'like', "%$query%")
-            ->orWhere('nama', 'like', "%$query")
-            ->orWhere('line_albino', 'like', "%$query")
-            ->orWhere('jenis_kelamin', 'like', "%$query")
-            ->orWhere('kelahiran', 'like', "%$query")
-            ->orWhere('deskripsi', 'like', "%$query")
-            ->orWhere('perkawinan', 'like', "%$query")
+        $ipnus = Ipnu::where('id', 'like', "%$query%")
+            ->orWhere('name', 'like', "%$query%")
+            ->orWhere('position', 'like', "%$query%")
+            ->orWhere('born', 'like', "%$query%")
+            ->orWhere('address', 'like', "%$query%")
+            ->orWhere('periode1', 'like', "%$query%")
+            ->orWhere('periode2', 'like', "%$query%")
             ->paginate();
 
-        $eggs = Egg::where('id', 'like', "%$query%")
-            ->orWhere('tanggal_inkubasi', 'like', "%$query")
-            ->orWhere('keterangan', 'like', "%$query")
-            ->orWhere('perkawinan', 'like', "%$query")
+        $ippnus = Ippnu::where('id', 'like', "%$query%")
+            ->orWhere('name', 'like', "%$query%")
+            ->orWhere('position', 'like', "%$query%")
+            ->orWhere('born', 'like', "%$query%")
+            ->orWhere('address', 'like', "%$query%")
+            ->orWhere('periode1', 'like', "%$query%")
+            ->orWhere('periode2', 'like', "%$query%")
             ->paginate();
 
-        return view('admin.pages.search.search-result', compact('geckos', 'eggs'));
+        return view('admin.pages.search.search-result', compact('ipnus', 'ippnus'));
     }
 }

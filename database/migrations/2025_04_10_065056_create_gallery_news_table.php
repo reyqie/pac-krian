@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gallery_geckos', function (Blueprint $table) {
+        Schema::create('gallery_news', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('gecko_id')->constrained('geckos')->onDelete('cascade');
+            $table->foreignId('news_id')->constrained('news')->onDelete('cascade');
             $table->string('url');
 
             $table->softDeletes();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gallery_geckos');
+        Schema::dropIfExists('gallery_news');
     }
 };

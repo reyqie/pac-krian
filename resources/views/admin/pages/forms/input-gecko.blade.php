@@ -6,11 +6,11 @@
 <div class="main-panel">
     <div class="content-wrapper" style="background-color: #252635">
         <div class="page-header">
-            <h3 class="page-title text-white"> Input Data Leopard Gecko </h3>
+            <h3 class="page-title text-white"> Input Data IPNU </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item text-secondary"></a>Input Data</li>
-                    <li class="breadcrumb-item active text-white" aria-current="page">Leopard Gecko</li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">IPNU</li>
                 </ol>
             </nav>
         </div>
@@ -18,56 +18,47 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card" style="background-color: #161B2F">
                     <div class="card-body text-white">
-                        <form class="forms-sample" method="POST" action="{{ route('gecko.store') }}"
+                        <form class="forms-sample" method="POST" action="{{ route('ipnu.store') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="exampleInputName1">Nama</label>
-                                <input required type="text" name="nama" class="form-control text-white"
-                                    id="exampleInputName1" placeholder="Nama leopard Gecko"
+                                <label for="exampleInputName1">Nama Lengkap</label>
+                                <input required type="text" name="name" class="form-control text-white"
+                                    id="exampleInputName1" placeholder="Masukkan nama lengkap"
                                     style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail3">Line Albino</label>
-                                <select required class="form-select" name="line_albino" id="exampleSelectGender"
-                                    style="background-color: #0E111E;">
-                                    <option disabled selected hidden class="text-white">Pilih Line Albino
-                                    </option>
-                                    <option value="bell" class="text-white">Bell</option>
-                                    <option value="tremper" class="text-white">Tremper</option>
-                                    <option value="rainwater" class="text-white">Rainwater</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelectGender">Jenis Kelamin</label>
-                                <select required class="form-select" name="jenis_kelamin" id="exampleSelectGender"
-                                    style="background-color: #0E111E;">
-                                    <option disabled selected hidden class="text-white">Pilih Jenis Kelamin
-                                    </option>
-                                    <option value="jantan" class="text-white">Jantan</option>
-                                    <option value="betina" class="text-white">Betina</option>
-                                </select>
+                                <label for="exampleInputEmail3">Jabatan</label>
+                                <input required type="text" name="position" class="form-control text-white"
+                                    id="exampleInputName1" placeholder="Jabatan"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputCity1">Kelahiran</label>
-                                <input required type="text" name="kelahiran" class="form-control text-white"
+                                <input required type="text" name="born" class="form-control text-white"
                                     id="exampleInputCity1" placeholder="Tanggal Kelahiran"
                                     style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea1">Deskripsi</label>
-                                <textarea required class="form-control text-white" name="deskripsi"
+                                <label for="exampleTextarea1">Alamat</label>
+                                <textarea required class="form-control text-white" name="address" id="exampleTextarea1"
                                     id="exampleTextarea1" rows="4"
-                                    style="background-color: #0E111E; border: 3px solid #252635;"></textarea>
+                                    style="background-color: #0E111E; border: 3px solid #252635;" placeholder="Masukkan Alamat"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputCity1">Perkawinan</label>
-                                <input required type="text" name="perkawinan" class="form-control text-white"
-                                    id="exampleInputCity1" placeholder="Perkawinan"
+                                <label for="exampleInputCity1">Masa Khidmat Tahun Awal</label>
+                                <input required type="text" name="periode1" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Masukkan tahun awal jabatan"
                                     style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
-                                <label>Upload Gambar</label>
+                                <label for="exampleInputCity1">Masa Khidmat Tahun Akhir</label>
+                                <input required type="text" name="periode2" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Masukkan tahun akhir jabatan"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
+                            </div>
+                            <div class="form-group">
+                                <label>Upload Foto</label>
                                 <input required type="file" name="url[]" class="file-upload-default"
                                     id="profilePhotoInput" multiple>
                                 <div class="input-group col-xs-12">

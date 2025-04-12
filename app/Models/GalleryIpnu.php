@@ -6,17 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GalleryEgg extends Model
+class GalleryIpnu extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'gallery_ipnu';
     protected $fillable = [
-        'egg_id',
+        'ipnu_id',
         'url',
     ];
 
-    public function egg()
+    public function ipnu()
     {
-        $this->belongsTo(Egg::class, 'egg_id');
+        $this->belongsTo(Ipnu::class, 'ipnu_id');
     }
 }

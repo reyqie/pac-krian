@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\EggsExport;
 use App\Exports\EggsExport\EggsExport as EggsExportEggsExport;
 use App\Http\Controllers\Controller;
-use App\Models\Egg;
-use App\Models\GalleryEgg;
+use App\Models\Ippnu;
+use App\Models\GalleryIppnu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -15,8 +15,8 @@ class AdminEggController extends Controller
 {
     public function index()
     {
-        $eggs = Egg::with('galleryEggs')->paginate(10);
-        return view('admin.pages.tables.data-egg', compact('eggs'));
+        $ippnus = Ippnu::with('galleryIppnus')->paginate(10);
+        return view('admin.pages.tables.data-egg', compact('ippnus'));
     }
 
     public function create()
@@ -27,92 +27,119 @@ class AdminEggController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tanggal_inkubasi' => 'required|date',
-            'keterangan' => 'nullable|string|max:255',
-            'perkawinan' => 'required|string|max:255',
-            'url' => 'required|image|mimes:jpg,jpeg,png',
+            'name' => 'required|string|max:255',
+            'position' => 'required|string',
+            'born' => 'required|date',
+            'address' => 'required|string',
+            'periode1' => 'required|string|max:255',
+            'periode2' => 'required|string|max:255',
+            'url' => 'required|array',
+            'url.*' => 'image|mimes:jpg,jpeg,png',
         ]);
 
-        $egg = Egg::create(
+        $ippnu = Ippnu::create(
             $request->only([
-                'tanggal_inkubasi',
-                'keterangan',
-                'perkawinan',
+                'name',
+                'position',
+                'born',
+                'address',
+                'periode1',
+                'periode2',
             ])
         );
 
         if ($request->hasFile('url')) {
-            $image = $request->file('url');
-            $image->storeAs('public/eggs', $image->hashName());
+            foreach ($request->file('url') as $file) {
+                $filename = $file->hashName();
+                $file->storeAs('public/ippnus', $filename);
 
-            GalleryEgg::create([
-                'egg_id' => $egg->id,
-                'url' => $image->hashName(),
-            ]);
+                $ippnu->galleryIppnus()->create(['url' => $filename]);
+            }
         }
 
-        return redirect()->route('egg.index')->with('status', 'Data telur telah ditambahkan!');
+        return redirect()->route('ippnu.index')->with('status', 'Data IPPNU berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
-        $egg = Egg::findOrFail($id);
-        return view('admin.pages.edit.edit-egg', compact('egg'));
+        $ippnu = Ippnu::findOrFail($id);
+        return view('admin.pages.edit.edit-egg', compact('ippnu'));
     }
 
-    public function update(Request $request, Egg $egg)
+    public function update(Request $request, Ippnu $ippnu)
     {
         $request->validate([
-            'tanggal_inkubasi' => 'nullable|date',
-            'keterangan' => 'nullable|string|max:255',
-            'perkawinan' => 'nullable|string|max:255',
-            'url' => 'nullable|mimes:jpg,jpeg,png',
+            'name' => 'nullable|string|max:255',
+            'position' => 'nullable|string',
+            'born' => 'nullable|date',
+            'address' => 'nullable|string',
+            'periode1' => 'nullable|string|max:255',
+            'periode2' => 'nullable|string|max:255',
+            'url' => 'nullable|array',
+            'url.*' => 'image|mimes:jpg,jpeg,png',
         ]);
 
         if ($request->hasFile('url')) {
 
-            if ($egg->galleryEggs->url) {
-                Storage::delete('public/eggs/' . $egg->galleryEggs->url);
+            foreach ($ippnu->galleryIppnus as $galleryIppnu) {
+                if ($galleryIppnu->url) {
+                    Storage::delete('public/ippnus/' . $galleryIppnu->url);
+                }
             }
 
-            $egg->galleryEggs()->forceDelete();
+            $ippnu->galleryIppnus()->forceDelete();
 
-            $image = $request->file('url');
-            $image->storeAs('public/eggs/', $image->hashName());
+            foreach ($request->file('url') as $file) {
+                if ($file instanceof \Illuminate\Http\UploadedFile) {
+                    $filename = $file->hashName();
+                    $file->storeAs('public/ippnus', $filename);
+                }
 
-            $egg->galleryEggs()->create([
-                'url' => $image->hashName(),
-            ]);
+                $ippnu->galleryIppnus()->create([
+                    'url' => $filename,
+                ]);
+            }
 
-            $egg->update([
-                'tanggal_inkubasi' => $request->tanggal_inkubasi,
-                'keterangan' => $request->keterangan,
-                'perkawinan' => $request->perkawinan,
+            $ippnu->update([
+                'name' => $request->name,
+                'position' => $request->position,
+                'born' => $request->born,
+                'address' => $request->address,
+                'periode1' => $request->periode1,
+                'periode2' => $request->periode2,
             ]);
         }
 
-        $egg->update([
-            'tanggal_inkubasi' => $request->tanggal_inkubasi,
-            'keterangan' => $request->keterangan,
-            'perkawinan' => $request->perkawinan,
+        $ippnu->update([
+            'name' => $request->name,
+            'position' => $request->position,
+            'born' => $request->born,
+            'address' => $request->address,
+            'periode1' => $request->periode1,
+            'periode2' => $request->periode2,
         ]);
 
-        return redirect()->route('egg.index')->with('status', 'Data telur telah berhasil diperbarui!');
+
+        return redirect()->route('ippnu.index')->with('status', 'Data IPPNU berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
-        $egg = Egg::findOrFail($id);
+        $ippnu = Ippnu::findOrFail($id);
 
-        Storage::delete('public/eggs/' . $egg->galleryEggs->url);
+        foreach ($ippnu->galleryIppnus as $galleryIppnu) {
+            if ($galleryIppnu->url) {
+                Storage::delete('public/ippnus/' . $galleryIppnu->url);
+            }
+        }
 
-        $egg->forceDelete();
+        $ippnu->forceDelete();
 
-        return redirect()->route('egg.index');
+        return redirect()->route('ippnu.index');
     }
 
     public function export()
     {
-        return Excel::download(new EggsExport, 'eggs.xlsx');
+        return Excel::download(new EggsExport, 'ippnu.xlsx');
     }
 }

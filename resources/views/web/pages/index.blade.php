@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'BGecko - Sistem Informasi Leopard Gecko')
+@section('title', 'Pelajar NU Krian - Website Resmi PAC IPNU IPPNU Krian')
 
 @section('content')
 
@@ -9,16 +9,16 @@
     <div class="row align-items-center">
         <div class="hero-title col-md-6">
             <h1 class="title">
-                <section>BGecko</section>, Sistem Informasi Leopard Gecko
+                <section>Pelajar NU Krian</section>, Website Resmi PAC IPNU IPPNU Krian
             </h1>
-            <p class="description">Dimana anda bisa mencari informasi mengenai hewan hias Leopard Gecko</p>
+            <p class="description">Pimpinan Anak Cabang Ikatan Pelajar Nahdlatul Ulama - Ikatan Pelajar Putri Nahdlatul Ulama Kecamatan Krian.</p>
             <div class="button">
-                <a href="{{ route('gecko') }}">Data Gecko</a>
+                <a href="{{ route('news') }}">Lihat Berita</a>
             </div>
         </div>
 
         <div class="hero-image col-md-6 d-flex justify-content-end">
-            <img src="{{ asset('web/images/hero-image.png') }}" alt="Hero Image">
+            <img src="{{ asset('web/images/logo-pac.jpg') }}" alt="Hero Image" class="border rounded-circle">
         </div>
     </div>
 </div>
@@ -26,61 +26,53 @@
 {{-- category section --}}
 <div class="container category-section">
     <div class="row justify-content-center">
-        <h4 class="text-center">DAFTAR KATEGORI</h4>
-        <h1 class="text-center mt-4">Kategori Gecko</h1>
+        <h4 class="text-center">PAC IPNU IPPNU KRIAN</h4>
+        <h1 class="text-center mt-1">Support By</h1>
 
         <div class="col-lg-3 col-md-6 col-sm-12 text-center d-flex justify-content-center">
             <div class="category-box pt-5">
-                <img src="{{ asset('web/images/category-image1.png') }}" alt="Category Image1">
-                <h3>Raptor</h3>
-                <p>+10 Ekor</p>
+                <img src="{{ asset('web/images/logo-nu.png') }}" alt="Category Image1" class="border rounded-circle">
+                <h3>Nahdlatul Ulama</h3>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 text-center d-flex justify-content-center">
             <div class="category-box pt-5">
-                <img src="{{ asset('web/images/category-image2.png') }}" alt="Category Image2">
-                <h3>Sunglow</h3>
-                <p>+10 Ekor</p>
+                <img src="{{ asset('web/images/logo-muslimat.png') }}" alt="Category Image2" class="border rounded-circle">
+                <h3>Muslimat NU</h3>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 text-center d-flex justify-content-center">
             <div class="category-box pt-5">
-                <img src="{{ asset('web/images/category-image3.png') }}" alt="Category Image3">
-                <h3>SHTCT</h3>
-                <p>+10 Ekor</p>
+                <img src="{{ asset('web/images/logo-ansor.png') }}" alt="Category Image3" class="border rounded-circle">
+                <h3>GP Ansor</h3>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 text-center d-flex justify-content-center">
             <div class="category-box pt-5">
-                <img src="{{ asset('web/images/category-image4.png') }}" alt="Category Image4">
-                <h3>Jungle</h3>
-                <p>+10 Ekor</p>
+                <img src="{{ asset('web/images/logo-banser.png') }}" alt="Category Image4" class="border rounded-circle">
+                <h3>Banser</h3>
             </div>
         </div>
     </div>
-</div>
-
-{{-- information section--}}
-<div class="container information-section">
     <div class="row justify-content-center">
-        <h4>TELUR GECKO</h4>
-        <h1 class="mt-4">Beberapa Informasi <br><span>Data Telur</span></h1>
-
-        @foreach ($eggs as $egg)
-        <div class="col-lg-4 col-md-12 col-sm-12 d-flex justify-content-center">
-            <div class="information-box pt-5 pb-2" style="height: auto">
-                <div class="egg-icon">
-                    <img class="d-block mx-auto mt-3" src="{{ asset('web/images/egg-icon.png') }}" alt="Egg Icon">
-                </div>
-                <img class="d-block mx-auto gallery" src="{{ Storage::url('eggs/' . $egg->galleryEggs->url) }}"
-                    alt="Egg Image">
-                <h3 class="text-capitalize">{{ \Carbon\Carbon::parse($egg->tanggal_inkubasi)->translatedFormat('d M Y')
-                    }}</h3>
-                <p class="text-capitalize" style="word-wrap: break-word;">{{ $egg->keterangan }}</p>
-                <p class="yellow-text" style="word-wrap: break-word;">{{ $egg->perkawinan }}</p>
+    <div class="col-lg-3 col-md-6 col-sm-12 text-center d-flex justify-content-center">
+        <div class="category-box pt-5">
+            <img src="{{ asset('web/images/logo-cbp.png') }}" alt="Category Image1" class="border rounded-circle">
+            <h3>CBP</h3>
+        </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 text-center d-flex justify-content-center">
+            <div class="category-box pt-5">
+                <img src="{{ asset('web/images/logo-kpp.png') }}" alt="Category Image2" class="border rounded-circle">
+                <h3>KPP</h3>
             </div>
         </div>
-        @endforeach
+        <div class="col-lg-3 col-md-6 col-sm-12 text-center d-flex justify-content-center">
+            <div class="category-box pt-5">
+                <img src="{{ asset('web/images/logo-mpk.png') }}" alt="Category Image3" class="border rounded-circle">
+                <h3>MPK</h3>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -88,16 +80,14 @@
 <div class="container description-section">
     <div class="row">
         <div class="description-image col-lg-6 col-md-12 d-flex justify-content-center">
-            <img src="{{ asset('web/images/description-image.png') }}" alt="Description Image">
+            <img src="{{ asset('web/images/desc-image.jpeg') }}" alt="Description Image">
         </div>
 
         <div class="description-text col-lg-6 col-md-12">
-            <h4>TENTANG GECKO</h4>
-            <h1 class="mt-4">Apa itu hewan hias<br><span>Leopard Gecko?</span></h1>
-            <p>“Tokek Leopard adalah jenis tokek yang terdapat di Pakistan, India dan Iran. Tokek ini adalah
-                binatang hias dan menjadi hewan peliharaan populer karena warna tubuhnya yang indah dan perawatannya
-                yang mudah.”</p>
-            <img src="{{ asset('web/images/description-detail-image.png') }}" alt="Description Detail Image">
+            <h4>TENTANG PAC IPNU IPPNU KRIAN</h4>
+            <h1 class="mt-1">PAC IPNU IPPNU Krian <br><span>itu apa sih?</span></h1>
+            <p style="text-align: justify">“PAC IPNU IPPNU KRIAN  adalah rumah bagi para pelajar Nahdlatul Ulama di Krian — tempat tumbuh, belajar, dan berproses. Melalui semangat ke-NU-an, PAC IPNU IPPNU Krian hadir untuk membina generasi muda yang cerdas, berakhlak, dan siap memimpin. Kami aktif dalam kegiatan keagamaan, pendidikan, sosial, hingga pelestarian budaya, demi menciptakan pelajar yang tidak hanya unggul secara ilmu, tapi juga kokoh dalam iman dan tradisi.”</p>
+            <img src="{{ asset('web/images/desc-detail-image.png') }}" alt="Description Detail Image">
         </div>
     </div>
 </div>

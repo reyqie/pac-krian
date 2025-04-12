@@ -2,15 +2,16 @@
   style="background-color: #0E111E;">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start"
     style="background-color: #0E111E;">
-    <a class="navbar-brand brand-logo" href="{{ route('dashboard') }}"><img
-        src="{{ asset('web/images/logo-icon.png') }}" alt="logo" /></a>
+    <a class="navbar-brand brand-logo" href="{{ route('dashboard') }}">
+      <h4 class="fw-bold d-inline-block" style="color: #39db4a"><b>PELAJAR NU KRIAN</b></h4>
+    </a>
     <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard') }}"><img
         src="{{ asset('admin/images/logo-mini.svg') }}" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
-    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+    <!-- <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
       <span class="mdi mdi-menu"></span>
-    </button>
+    </button> -->
     <div class="search-field d-none d-md-block">
       <form class="d-flex align-items-center h-100" action="{{ route('search') }}" method="GET">
         <div class="input-group">

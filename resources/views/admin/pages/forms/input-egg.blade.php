@@ -6,11 +6,11 @@
 <div class="main-panel">
     <div class="content-wrapper" style="background-color: #252635">
         <div class="page-header">
-            <h3 class="page-title text-white"> Input Data Telur </h3>
+            <h3 class="page-title text-white"> Input Data IPPNU </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item text-secondary">Input Data</li>
-                    <li class="breadcrumb-item active text-white" aria-current="page">Telur</li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">IPPNU</li>
                 </ol>
             </nav>
         </div>
@@ -18,33 +18,51 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card" style="background-color: #161B2F;">
                     <div class="card-body text-white">
-                        <form class="forms-sample" method="POST" action="{{ route('egg.store') }}"
+                        <form class="forms-sample" method="POST" action="{{ route('ippnu.store') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="exampleInputCity1">Tanggal Inkubasi</label>
-                                <input required type="text" name="tanggal_inkubasi" class="form-control text-white"
-                                    id="exampleInputCity1" placeholder="Tanggal Inkubasi"
+                                <label for="exampleInputName1">Nama Lengkap</label>
+                                <input required type="text" name="name" class="form-control text-white"
+                                    id="exampleInputName1" placeholder="Masukkan nama lengkap"
                                     style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
-                                <label for="exampleTextarea1">Keterangan</label>
-                                <textarea required class="form-control text-white" name="keterangan"
+                                <label for="exampleInputEmail3">Jabatan</label>
+                                <input required type="text" name="position" class="form-control text-white"
+                                    id="exampleInputName1" placeholder="Jabatan"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Kelahiran</label>
+                                <input required type="text" name="born" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Tanggal Kelahiran"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Alamat</label>
+                                <textarea required class="form-control text-white" name="address" id="exampleTextarea1"
                                     id="exampleTextarea1" rows="4"
-                                    style="background-color: #0E111E; border: 3px solid #252635;"></textarea>
+                                    style="background-color: #0E111E; border: 3px solid #252635;" placeholder="Masukkan Alamat"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputCity1">Perkawinan</label>
-                                <input required type="text" name="perkawinan" class="form-control text-white"
-                                    id="exampleInputCity1" placeholder="Perkawinan"
+                                <label for="exampleInputCity1">Masa Khidmat Tahun Awal</label>
+                                <input required type="text" name="periode1" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Masukkan tahun awal jabatan"
                                     style="background-color: #0E111E; border: 3px solid #252635;">
                             </div>
                             <div class="form-group">
-                                <label>Upload Gambar</label>
-                                <input required type="file" name="url" id="profilePhotoInput"
-                                    class="file-upload-default">
+                                <label for="exampleInputCity1">Masa Khidmat Tahun Akhir</label>
+                                <input required type="text" name="periode2" class="form-control text-white"
+                                    id="exampleInputCity1" placeholder="Masukkan tahun akhir jabatan"
+                                    style="background-color: #0E111E; border: 3px solid #252635;">
+                            </div>
+                            <div class="form-group">
+                                <label>Upload Foto</label>
+                                <input required type="file" name="url[]" class="file-upload-default"
+                                    id="profilePhotoInput" multiple>
                                 <div class="input-group col-xs-12">
-                                    <input type="text" class="form-control file-upload-info text-white" disabled
+                                    <input type="text" class="form-control text-white file-upload-info" disabled
                                         placeholder="Upload Gambar"
                                         style="background-color: #0E111E; border: 3px solid #252635;">
                                     <span class="input-group-append">
@@ -69,18 +87,22 @@
 
     @section('scripts')
     <script>
-        document.getElementById('profilePhotoInput').addEventListener('change', function() {
-                var fileName = this.files[0] ? this.files[0].name : 'Upload Gambar';
-                document.querySelector('.file-upload-info').value = fileName;
-            });
+    document.getElementById('profilePhotoInput').addEventListener('change', function() {
+        var fileNames = [];
+        for (var i = 0; i < this.files.length; i++) {
+            fileNames.push(this.files[i].name);
+        }
+        document.querySelector('.file-upload-info').value = fileNames.join(', '); 
+    });
 
-        $(document).ready(function name() {
-            $('#exampleInputCity1').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true,
-                language: 'id',
-            });
-        })
+    $(document).ready(function(){
+        $('#exampleInputCity1').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+            language: 'id',
+        });
+    });
+
     </script>
     @endsection

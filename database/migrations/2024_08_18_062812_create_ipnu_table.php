@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('geckos', function (Blueprint $table) {
+        Schema::create('ipnu', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nama');
-            $table->enum('line_albino', ['bell', 'tremper', 'rainwater']);
-            $table->enum('jenis_kelamin', ['jantan', 'betina']);
-            $table->date('kelahiran');
-            $table->longText('deskripsi')->nullable();
-            $table->string('perkawinan')->nullable();
+            $table->string('name');
+            $table->string('position');
+            $table->date('born');
+            $table->longText('address');
+            $table->string('periode1');
+            $table->string('periode2');
 
             $table->softDeletes();
             $table->timestamps();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('geckos');
+        Schema::dropIfExists('ipnu');
     }
 };

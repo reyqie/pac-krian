@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gallery_eggs', function (Blueprint $table) {
+        Schema::create('ippnu', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('egg_id')->constrained('eggs')->onDelete('cascade');
-            $table->string('url');
+            $table->string('name');
+            $table->string('position');
+            $table->date('born');
+            $table->longText('address');
+            $table->string('periode1');
+            $table->string('periode2');
 
             $table->softDeletes();
             $table->timestamps();
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gallery_eggs');
+        Schema::dropIfExists('ippnu');
     }
 };
